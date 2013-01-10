@@ -1,4 +1,4 @@
-div>
+<div>
   <div class="gridfooter" align="right">
     ## TODO:
     ## - render custom links from facts about the entity

@@ -38,9 +38,7 @@ blueprint_print_css = CSSLink(
     modname='blueprint',
     filename='static/print.css',
     media='print')
-#from moksha.lib.helpers import when_ready
 
-#import civx
 civx_js = JSLink(link='static/js/civx.js', javascript=[jquery_js])
 civx_css = CSSLink(link='static/css/civx.css')
 #from civx.widgets.civx_menu import CIVXMenu
@@ -48,7 +46,6 @@ civx_css = CSSLink(link='static/css/civx.css')
 
 jquery_ui_all_js = JSLink(filename='static/js/jquery-ui-1.8.2.custom.min.js',
                           modname=__name__)
-
 jquery_layout_js = JSLink(filename='static/js/jquery.layout.js',
                           modname=__name__)
 jqgrid_locale_en = JSLink(filename='static/js/i18n/grid.locale-en.js',

@@ -22,23 +22,32 @@ The CIVX Grid Widget
 from uuid import uuid4
 from inspect import isclass
 from tg import config
-from tw.api import Widget, JSLink, CSSLink, js_callback
-from tw.jquery import jquery_js, jQuery
+from tw2.core import Widget, JSLink, CSSLink, js_callback
+from tw2.jquery import jquery_js, jQuery
 
-from civx.widgets.blueprint import blueprint_sprites_css
-from civx.widgets.blueprint import blueprint_screen_css, blueprint_print_css
-from moksha.lib.helpers import when_ready
 
-import civx
-from civx.widgets.civx_js import civx_js
-from civx.widgets.style import civx_css
-from civx.widgets.civx_menu import CIVXMenu
-from civx.controllers.topN import graphs
+blueprint_sprites_css = CSSLink(
+    modname='blueprint',
+    filename='static/plugins/sprites/sprite.css',
+    media='screen')
+blueprint_screen_css = CSSLink(
+    modname='blueprint',
+    filename='static/screen.css',
+    media='screen, projection')
+blueprint_print_css = CSSLink(
+    modname='blueprint',
+    filename='static/print.css',
+    media='print')
+#from moksha.lib.helpers import when_ready
+
+#import civx
+civx_js = JSLink(link='static/js/civx.js', javascript=[jquery_js])
+civx_css = CSSLink(link='static/css/civx.css')
+#from civx.widgets.civx_menu import CIVXMenu
+#from civx.controllers.topN import graphs
 
 jquery_ui_all_js = JSLink(filename='static/js/jquery-ui-1.8.2.custom.min.js',
                           modname=__name__)
-#jquery_ui_all_js = JSLink(filename='static/js/jquery-ui-1.7.1.custom.min.js',
-#                          modname=__name__)
 
 jquery_layout_js = JSLink(filename='static/js/jquery.layout.js',
                           modname=__name__)
@@ -73,7 +82,7 @@ gitweb_url = config.get('civx.gitweb.url',
 class JQueryGrid(Widget):
     params = ['id', 'model', 'gridname', 'graphs', 'git_repo', 'gitweb',
               'model_module', 'scraper_module', 'civx_menu', 'menu']
-    template = 'mako:civx.widgets.jqgrid.templates.jqgrid'
+    template = 'mako:polygrid.templates.jqgrid'
     javascript = [jquery_js, jquery_ui_all_js, jquery_layout_js,
                   jqgrid_multiselect_js,
                   jqgrid_locale_en, jquery_jqgrid_js,
@@ -84,7 +93,7 @@ class JQueryGrid(Widget):
            civx_css, ui_multiselect_css]
 
     civx_menu = False # Whether or not to display the menu
-    menu = CIVXMenu('civx_menu')
+    #menu = CIVXMenu('civx_menu')
 
     def update_params(self, d):
         """ Assign a unique ID to this widget when it is rendered """

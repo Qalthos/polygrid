@@ -21,13 +21,13 @@ The CIVX Poly Grid
 
 import logging
 
-from tw.api import js_callback
-from tw.jquery import jQuery
+from tw2.core import js_callback
+from tw2.jquery import jQuery
 
-from civx.utils import get_knowledge_session, get_colmodel_from_entity, get_colnames_from_entity
-from civx.widgets.jqgrid import JQueryGrid
+from knowledge.model import Entity
 
-from civx.knowledge.model import Entity
+from utils import get_colmodel_from_entity, get_colnames_from_entity
+from widget import JQueryGrid
 
 log = logging.getLogger(__name__)
 

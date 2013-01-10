@@ -26,8 +26,8 @@ from tw2.jquery import jQuery
 
 from knowledge.model import Entity
 
-from utils import get_colmodel_from_entity, get_colnames_from_entity
-from widget import JQueryGrid
+from polygrid.utils import get_knowledge_session, get_colmodel_from_entity, get_colnames_from_entity
+from polygrid.widgets import JQueryGrid
 
 log = logging.getLogger(__name__)
 

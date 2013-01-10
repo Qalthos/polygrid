@@ -1,3 +1,10 @@
+def get_knowledge_session(db_uri):
+    from sqlalchemy import create_engine
+    from knowledge.model import metadata
+    engine = create_engine(db_uri)
+    metadata.bind = engine
+    return scoped_session(sessionmaker(bind=engine))
+
 def get_colmodel_from_entity(entity, show=10):
     """ Build the dynamic jqGrid colModel from an Entity """
     colModel = [{

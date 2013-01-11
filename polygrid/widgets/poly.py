@@ -20,6 +20,7 @@ The CIVX Poly Grid
 """
 
 import logging
+from uuid import uuid4
 
 from tw2.core import js_callback
 
@@ -42,6 +43,8 @@ class PolyGrid(JQueryGrid):
 
     def prepare(self):
         super(PolyGrid, self).prepare()
+        if not getattr(self, 'id', None):
+            self.id = str(uuid4())
 
         Knowledge = get_knowledge_session("sqlite:///knowledge.db")
         #entity = Entity.by_name(self.model)

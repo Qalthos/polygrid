@@ -39,55 +39,55 @@ class PolyGrid(JQueryGrid):
 
         Knowledge = get_knowledge_session()
         try:
-            entity = Knowledge.query(Entity).filter_by(name=d.model).one()
+            self.entity = Knowledge.query(Entity).filter_by(name=self.model).one()
         except Exception, e:
             log.warning(e)
-            entity = Knowledge.query(Entity).filter_by(name=d.model).first()
+            self.entity = Knowledge.query(Entity).filter_by(name=self.model).first()
 
-        colNames = get_colnames_from_entity(entity)
-        colModel = get_colmodel_from_entity(entity)
+        colNames = get_colnames_from_entity(self.entity)
+        colModel = get_colmodel_from_entity(self.entity)
 
         params = {
-            'url': '/grids/query?widget=' + entity.name,
+            'url': '/grids/query?widget=knowledge' + self.entity.name,
             'datatype': 'json',
             'colNames': colNames,
             'colModel': colModel,
             'height': 550,
             'rowNum': 25,
             #'rowList': [10,20,30],
-            'pager': '#%s_pager' % d.id,
+            'pager': '#%s_pager' % self.id,
             'sortname': 'id',
             'viewrecords': True,
             'sortorder': "desc",
-            'caption': entity.name,
+            'caption': self.entity.name,
             'autowidth': True,
             'loadui': 'block',
             #'shrinkToFit': True,
             'forcefit': True,
             }
 
-        self.add_call(jQuery('#' + d.id)
+        self.add_call(jQuery('#' + self.id)
                         .jqGrid(params)
-                        .navGrid('#%s_pager' % d.id, {
+                        .navGrid('#%s_pager' % self.id, {
                             'add': False,
                             'del': False,
                             'edit': False,
                             'search': False,
                             }, {}, {}, {}, {'multipleSearch': True}))
 
-        self.add_call(jQuery('#' + d.id)
+        self.add_call(jQuery('#' + self.id)
                         .jqGrid('filterToolbar',{
                             'stringResult': True,
                             'searchOnEnter': False
                             }));
 
-        self.add_call(jQuery('#' + d.id)
-                        .jqGrid('navButtonAdd', '#%s_pager' % d.id, {
+        self.add_call(jQuery('#' + self.id)
+                        .jqGrid('navButtonAdd', '#%s_pager' % self.id, {
                             'caption': 'Columns',
                             'title': 'Reorder Columns',
                             'onClickButton': js_callback("""
                                 function() {
                                     jQuery('#%s').jqGrid('columnChooser');
                                 }
-                            """ %  d.id),
+                            """ %  self.id),
                             }))

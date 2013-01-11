@@ -95,21 +95,21 @@ class JQueryGrid(Widget):
     def prepare(self):
         """ Assign a unique ID to this widget when it is rendered """
         super(JQueryGrid, self).prepare()
-        if not d.id:
-            d.id = str(uuid4())
-        d.gridname = self.__class__.__name__
-        d.graphs = graphs
-        if d.model:
-            if isinstance(d.model, basestring):
-                civx_model = civx.utils.get_model(d.model)
+        if not self.id:
+            self.id = str(uuid4())
+        self.gridname = self.__class__.__name__
+        self.graphs = graphs
+        if self.model:
+            if isinstance(self.model, basestring):
+                civx_model = civx.utils.get_model(self.model)
                 if civx_model:
-                    d.model = civx_model
-            if isclass(d.model):
-                d.git_repo = civx.utils.get_git_repo_from_model(d.model)
-                d.gitweb = gitweb_url
-                d.model_module = d.model.__module__ + '.' + d.model.__name__
-                scraper = civx.utils.get_scraper_from_model(d.model)
+                    self.model = civx_model
+            if isclass(self.model):
+                self.git_repo = civx.utils.get_git_repo_from_model(self.model)
+                self.gitweb = gitweb_url
+                self.model_module = self.model.__module__ + '.' + self.model.__name__
+                scraper = civx.utils.get_scraper_from_model(self.model)
                 if scraper:
-                    d.scraper_module = scraper.__module__ + '.' + scraper.__name__
+                    self.scraper_module = scraper.__module__ + '.' + scraper.__name__
 
 # vim: expandtab sw=4 ts=4 ai

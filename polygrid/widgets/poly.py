@@ -28,7 +28,7 @@ from tw2.jqplugins.jqgrid.base import jqgrid_js, jqgrid_css
 
 from knowledge.model import Entity
 
-from polygrid.utils import get_knowledge_session, get_colmodel_from_entity, get_colnames_from_entity
+from polygrid.utils import get_knowledge_session, get_colmodel_and_colnames_from_entity
 from polygrid.widgets import JQueryGrid
 
 log = logging.getLogger(__name__)
@@ -43,18 +43,16 @@ class PolyGrid(JQueryGrid):
     def prepare(self):
         super(PolyGrid, self).prepare()
 
-        Knowledge = get_knowledge_session()
-        try:
-            self.entity = Knowledge.query(Entity).filter_by(name=self.model).one()
-        except Exception, e:
-            log.warning(e)
-            self.entity = Knowledge.query(Entity).filter_by(name=self.model).first()
+        Knowledge = get_knowledge_session("sqlite:///knowledge.db")
+        #entity = Entity.by_name(self.model)
+        self.entity = Knowledge.query(Entity).filter(Entity.name.like('user_%')).first()
 
-        colNames = get_colnames_from_entity(self.entity)
-        colModel = get_colmodel_from_entity(self.entity)
+        #colNames = get_colnames_from_entity(entity)
+        #colModel = get_colmodel_from_entity(entity)
+        colModel, colNames = get_colmodel_and_colnames_from_entity(Knowledge, 'user_%')
 
         params = {
-            'url': '/grids/query?widget=knowledge' + self.entity.name,
+            'url': '/grid/query?like=user_%',
             'datatype': 'json',
             'colNames': colNames,
             'colModel': colModel,

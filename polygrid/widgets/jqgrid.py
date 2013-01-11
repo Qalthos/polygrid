@@ -92,9 +92,9 @@ class JQueryGrid(Widget):
     civx_menu = False # Whether or not to display the menu
     #menu = CIVXMenu('civx_menu')
 
-    def update_params(self, d):
+    def prepare(self):
         """ Assign a unique ID to this widget when it is rendered """
-        super(JQueryGrid, self).update_params(d)
+        super(JQueryGrid, self).prepare()
         if not d.id:
             d.id = str(uuid4())
         d.gridname = self.__class__.__name__

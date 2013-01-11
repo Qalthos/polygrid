@@ -37,8 +37,8 @@ class PolyGrid(JQueryGrid):
     template = "mako:polygrid.templates.polygrid"
     engine_name = 'mako'
 
-    def update_params(self, d):
-        super(PolyGrid, self).update_params(d)
+    def prepare(self):
+        super(PolyGrid, self).prepare()
 
         Knowledge = get_knowledge_session()
         try:

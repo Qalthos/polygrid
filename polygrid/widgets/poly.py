@@ -32,10 +32,7 @@ from polygrid.widgets import JQueryGrid
 log = logging.getLogger(__name__)
 
 class PolyGrid(JQueryGrid):
-    params = ['entity']
-
     template = "mako:polygrid.templates.polygrid"
-    engine_name = 'mako'
 
     def prepare(self):
         super(PolyGrid, self).prepare()

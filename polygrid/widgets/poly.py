@@ -22,7 +22,9 @@ The CIVX Poly Grid
 import logging
 
 from tw2.core import js_callback
-from tw2.jquery import jQuery
+
+from tw2.jquery import jQuery, jquery_js
+from tw2.jqplugins.jqgrid.base import jqgrid_js, jqgrid_css
 
 from knowledge.model import Entity
 
@@ -32,6 +34,10 @@ from polygrid.widgets import JQueryGrid
 log = logging.getLogger(__name__)
 
 class PolyGrid(JQueryGrid):
+    resources = [
+        jquery_js,
+        jqgrid_js, jqgrid_css,
+    ]
     template = "mako:polygrid.templates.polygrid"
 
     def prepare(self):

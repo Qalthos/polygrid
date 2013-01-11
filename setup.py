@@ -8,6 +8,7 @@ setup(
         install_requires=[
             'knowledge',
             'tw2.jquery',
+            'tw2.jqplugins.jqgrid',
         ],
         packages=find_packages(exclude=['ez_setup']),
         zip_safe=True,

@@ -25,7 +25,7 @@ from uuid import uuid4
 from tw2.core import js_callback
 
 from tw2.jquery import jQuery, jquery_js
-from tw2.jqplugins.jqgrid.base import jqgrid_js, jqgrid_css
+from tw2.jqplugins.jqgrid.base import jqgrid_locale, jqgrid_js, jqgrid_css
 
 from knowledge.model import Entity
 
@@ -37,7 +37,7 @@ log = logging.getLogger(__name__)
 class PolyGrid(JQueryGrid):
     resources = [
         jquery_js,
-        jqgrid_js, jqgrid_css,
+        jqgrid_locale, jqgrid_js, jqgrid_css,
     ]
     template = "mako:polygrid.templates.polygrid"
 

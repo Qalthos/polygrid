@@ -48,12 +48,8 @@ class PolyGrid(JQueryGrid):
         search_str = '%'
 
         Knowledge = get_knowledge_session("sqlite:///knowledge.db")
-        #entity = Entity.by_name(self.model)
-        #self.entity = Knowledge.query(Entity).filter(Entity.name.like(search_str)).first()
         self.entity = None
 
-        #colNames = get_colnames_from_entity(entity)
-        #colModel = get_colmodel_from_entity(entity)
         colModel, colNames = get_colmodel_and_colnames_from_entity(Knowledge, search_str)
 
         params = {

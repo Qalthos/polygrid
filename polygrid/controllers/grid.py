@@ -19,7 +19,9 @@ class GridController(object):
             page = total_pages
 
         model, columns = get_colmodel_and_colnames_from_entity(Knowledge, like)
-                  #~ .order_by(getattr(getattr(model, sidx), sord)()) \
+
+        # This goes before offset, if it gets fixed
+        #~ .order_by(getattr(getattr(model, sidx), sord)()) \
         query = query \
                   .offset(max(page*rows - rows, 0)) \
                   .limit(rows) \

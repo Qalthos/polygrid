@@ -77,15 +77,12 @@ gitweb_url = config.get('civx.gitweb.url',
                         'http://civx-git1.csh.rit.edu/repoweb')
 
 class JQueryGrid(Widget):
-    params = ['id', 'model', 'gridname', 'graphs', 'git_repo', 'gitweb',
-              'model_module', 'scraper_module', 'civx_menu', 'menu']
     template = 'mako:polygrid.templates.jqgrid'
-    javascript = [jquery_js, jquery_ui_all_js, jquery_layout_js,
+    resources = [jquery_js, jquery_ui_all_js, jquery_layout_js,
                   jqgrid_multiselect_js,
                   jqgrid_locale_en, jquery_jqgrid_js,
                   #jquery_tablednd_js,#jqgrid_contextmenu_js,
-                  civx_js]
-    css = [lightness_ui_css, ui_jqgrid_css,
+                  civx_js, lightness_ui_css, ui_jqgrid_css,
            blueprint_screen_css, blueprint_print_css, blueprint_sprites_css,
            civx_css, ui_multiselect_css]
 

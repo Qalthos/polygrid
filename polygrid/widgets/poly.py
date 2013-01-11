@@ -45,17 +45,19 @@ class PolyGrid(JQueryGrid):
         super(PolyGrid, self).prepare()
         if not getattr(self, 'id', None):
             self.id = str(uuid4())
+        search_str = '%'
 
         Knowledge = get_knowledge_session("sqlite:///knowledge.db")
         #entity = Entity.by_name(self.model)
-        self.entity = Knowledge.query(Entity).filter(Entity.name.like('user_%')).first()
+        #self.entity = Knowledge.query(Entity).filter(Entity.name.like(search_str)).first()
+        self.entity = None
 
         #colNames = get_colnames_from_entity(entity)
         #colModel = get_colmodel_from_entity(entity)
-        colModel, colNames = get_colmodel_and_colnames_from_entity(Knowledge, 'user_%')
+        colModel, colNames = get_colmodel_and_colnames_from_entity(Knowledge, search_str)
 
         params = {
-            'url': '/grid/query?like=user_%',
+            'url': '/grid/query?like=%s' % search_str,
             'datatype': 'json',
             'colNames': colNames,
             'colModel': colModel,
@@ -66,7 +68,7 @@ class PolyGrid(JQueryGrid):
             'sortname': 'id',
             'viewrecords': True,
             'sortorder': "desc",
-            'caption': self.entity.name,
+            'caption': search_str, #self.entity.name,
             'autowidth': True,
             'loadui': 'block',
             #'shrinkToFit': True,

@@ -31,7 +31,7 @@ class GridController(object):
             for col in columns:
                 if col == 'id':
                     continue
-                cell.append(row[col])
+                cell.append(getattr(row, col, None))
             # Note: this requires each model to have an 'id' column...
             entries.append({'id': row.id, 'cell': cell})
 

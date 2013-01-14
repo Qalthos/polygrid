@@ -55,7 +55,10 @@ class GridController(object):
             for col in columns:
                 if col == 'id':
                     continue
-                cell.append(getattr(row, col, None))
+                try:
+                    cell.append(row[col])
+                except KeyError:
+                    cell.append(None)
             # Note: this requires each model to have an 'id' column...
             entries.append({'id': row.id, 'cell': cell})
 

@@ -24,6 +24,7 @@ from inspect import isclass
 from tg import config
 from tw2.core import Widget, JSLink, CSSLink, js_callback
 from tw2.jquery import jquery_js, jQuery
+from tw2.jqplugins.ui import set_ui_theme_name, jquery_ui
 from tw2.jqplugins.jqgrid.base import jqgrid_locale, jqgrid_js, jqgrid_css
 
 
@@ -45,8 +46,6 @@ civx_css = CSSLink(link='static/css/civx.css')
 #from civx.widgets.civx_menu import CIVXMenu
 #from civx.controllers.topN import graphs
 
-jquery_ui_all_js = JSLink(filename='static/js/jquery-ui-1.8.2.custom.min.js',
-                          modname=__name__)
 jquery_layout_js = JSLink(filename='static/js/jquery.layout.js',
                           modname=__name__)
 jquery_tablednd_js = JSLink(filename='static/js/jquery.tablednd.js',
@@ -60,9 +59,6 @@ jqgrid_contextmenu_js = JSLink(filename='static/js/jquery.contextmenu.js',
 jqgrid_multiselect_js = JSLink(filename='static/js/ui.multiselect.js',
                                modname=__name__)
 
-lightness_ui_css = CSSLink(filename='static/themes/start/jquery-ui.custom.css',
-                           modname=__name__, media='screen')
-
 ui_multiselect_css = CSSLink(filename='static/themes/ui.multiselect.css',
                         modname=__name__, media='screen')
 jqgrid_fluid_js = JSLink(filename='static/js/jquery.jqGrid.fluid.js', modname=__name__)
@@ -72,13 +68,17 @@ gitweb_url = config.get('civx.gitweb.url',
 
 class JQueryGrid(Widget):
     template = 'mako:polygrid.templates.jqgrid'
-    resources = [jquery_js, jquery_ui_all_js, jquery_layout_js,
-                  jqgrid_multiselect_js,
-                  jqgrid_locale, jqgrid_js, jqgrid_css,
-                  #jquery_tablednd_js,#jqgrid_contextmenu_js,
-                  civx_js, lightness_ui_css,
-           blueprint_screen_css, blueprint_print_css, blueprint_sprites_css,
-           civx_css, ui_multiselect_css]
+    set_ui_theme_name('ui-lightness')
+    resources = [
+        jquery_js,
+        jqgrid_locale, jqgrid_js, jqgrid_css,
+        jquery_ui,
+        jquery_layout_js, jqgrid_multiselect_js,
+        #jquery_tablednd_js,#jqgrid_contextmenu_js,
+        civx_js, civx_css,
+        blueprint_screen_css, blueprint_print_css, blueprint_sprites_css,
+        ui_multiselect_css
+    ]
 
     civx_menu = False # Whether or not to display the menu
     #menu = CIVXMenu('civx_menu')

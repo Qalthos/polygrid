@@ -17,8 +17,8 @@ def get_colmodel_and_colnames_from_entity(knowledge, like):
         'width': 1,
         'key': True,
         'search': False
-    }]
-    columns = ['id']
+    }, {'name':'name', 'index':'name'}]
+    columns = ['id', 'name']
     for entity in entities:
         for fact in entity.facts:
             if fact not in columns:

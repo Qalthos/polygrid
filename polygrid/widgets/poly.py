@@ -35,8 +35,9 @@ from polygrid.widgets import JQueryGrid
 
 log = logging.getLogger(__name__)
 
-civx_js = JSLink(link='static/js/civx.js', javascript=[jquery_js])
-civx_css = CSSLink(link='static/css/civx.css')
+modname = 'polygrid'
+civx_js = JSLink(modname=modname, filename='static/js/civx.js')
+civx_css = CSSLink(modname=modname, filename='static/css/civx.css')
 
 class PolyGrid(JQueryGrid):
     set_ui_theme_name('ui-lightness')

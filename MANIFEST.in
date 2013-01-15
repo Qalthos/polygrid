@@ -1,0 +1,2 @@
+recursive-include polygrid/static *
+recursive-include polygrid/templates *

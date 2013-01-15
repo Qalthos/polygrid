@@ -1,4 +1,5 @@
 import json
+import math
 
 from sqlalchemy import and_, or_, func
 from tg import expose
@@ -38,7 +39,7 @@ class GridController(object):
         count = query.count()
         page = int(page)
         rows = int(rows)
-        total_pages = count / rows
+        total_pages = math.ceil(float(count) / rows)
         if page > total_pages:
             page = total_pages
 
